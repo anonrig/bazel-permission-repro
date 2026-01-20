@@ -1,0 +1,8 @@
+cc_test(
+    name = "calculator_test",
+    srcs = ["calculator_test.cc"],
+    deps = [
+        "//src:calculator",
+        "@googletest//:gtest_main",
+    ],
+)

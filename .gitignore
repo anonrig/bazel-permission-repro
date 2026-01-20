@@ -1,0 +1,29 @@
+# Bazel directories
+bazel-*
+
+# Bazel user-specific settings
+user.bazelrc
+
+# Module lock file (optional, can be committed)
+MODULE.bazel.lock
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Build artifacts
+*.o
+*.a
+*.so
+*.dylib
+
+# Coverage artifacts
+*.gcda
+*.gcno
+*.gcov
+*.profraw
+*.profdata
+coverage.lcov

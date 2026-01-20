@@ -1,0 +1,35 @@
+# Coverage configuration
+build:coverage --remote_download_outputs=all
+build:coverage --strategy=TestRunner=local,remote
+build:coverage --strategy=CoverageReport=local,remote
+build:coverage --strategy=CoveragePostprocessing=local,remote
+
+# Disable test result caching to ensure fresh coverage data is generated
+coverage --nocache_test_results
+
+build:coverage --experimental_fetch_all_coverage_outputs
+build:coverage --experimental_split_coverage_postprocessing
+build:coverage --collect_code_coverage
+
+# Instrument all source code, not just test code
+build:coverage --instrumentation_filter="^//"
+
+# Use Clang/LLVM toolchain for coverage
+build:coverage --action_env=CC=clang
+build:coverage --action_env=CXX=clang++
+build:coverage --action_env=BAZEL_USE_LLVM_NATIVE_COVERAGE=1
+build:coverage --action_env=GCOV=llvm-profdata
+build:coverage --action_env=BAZEL_LLVM_COV=/usr/local/bin/llvm-cov
+build:coverage --action_env=BAZEL_LLVM_PROFDATA=/usr/local/bin/llvm-profdata
+
+# Test environment for LLVM coverage
+build:coverage --test_env=BAZEL_USE_LLVM_NATIVE_COVERAGE=1
+build:coverage --test_env=BAZEL_LLVM_COV=/usr/local/bin/llvm-cov
+build:coverage --test_env=GCOV=llvm-profdata
+
+# LLVM coverage format options
+build:coverage --experimental_use_llvm_covmap
+build:coverage --experimental_generate_llvm_lcov
+
+# Combined LCOV report location
+coverage --combined_report=lcov
